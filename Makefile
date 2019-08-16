@@ -1,8 +1,8 @@
 CXX := ccache $(CXX)
 CC := ccache $(CC)
 OUT_DIR := build
-INSTALL_DIR := ~/public_html/panelcfg_soap/
-EXECUTABLE := $(OUT_DIR)/panelsoap.cgi
+INSTALL_DIR := ~/public_html/cpp_odb_soap/
+EXECUTABLE := $(OUT_DIR)/cpp_odb_soap.cgi
 GSOAP_ROOT_DIR := /usr/share/gsoap/
 GSOAP_PLUGIN_DIR := $(GSOAP_ROOT_DIR)/plugin
 ALL_CPP_FILES := $(wildcard *.cpp)
@@ -38,8 +38,6 @@ $(ALL_OBJECT_FILES): $(ALL_SOURCE_FILES) | $(OUT_DIR)
 mrproper: clean
 clean:
 	-rm -rf $(OUT_DIR) *.o
-archive: clean
-	tar -C .. --exclude-vcs -cavf ../panelcfg_soap-`date +"%Y%m%d%H%M%S"`.tar.bz2 panelcfg_soap/
 install: $(EXECUTABLE)
 	mkdir -p $(INSTALL_DIR)
 	cp -a $(OUT_DIR)/*.wsdl $(OUT_DIR)/*.xsd $(INSTALL_DIR)
