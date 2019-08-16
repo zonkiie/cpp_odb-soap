@@ -12,8 +12,12 @@
 #include <odb/tr1/memory.hxx>
 
 using std::tr1::shared_ptr;
+using std::tr1::weak_ptr;
 using std::string;
 using std::vector;
+
+class user;
+class domain;
 
 #pragma db object
 class user
@@ -27,7 +31,10 @@ private:
 	friend class odb::access;
 	
 	user(){}
-	string _id, _firstname, _lastname;
+#pragma db id
+	string _id;
+	string _firstname, _lastname;
+#pragma db value_not_null inverse(_user)
 	vector<shared_ptr<domain>> domains;
 };
 
@@ -41,7 +48,11 @@ public:
 private:
 	friend class odb::access;
 	domain(){}
-	string _id, _domainname;
+#pragma db id
+	string _id;
+	string _domainname;
+#pragma db not_null
+	shared_ptr<user> _user;
 };
 
 #endif
