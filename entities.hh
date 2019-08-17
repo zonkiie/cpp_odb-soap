@@ -1,6 +1,9 @@
 #ifndef __entities__
 #define __entities__
 
+#ifndef ODB
+#import <stlvector.h>
+#endif
 #include <includes-odb.hh>
 
 class user;
