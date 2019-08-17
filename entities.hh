@@ -4,7 +4,6 @@
 #ifndef ODB
 #import <stlvector.h>
 #endif
-#include <includes-odb.hh>
 
 class user;
 class domain;

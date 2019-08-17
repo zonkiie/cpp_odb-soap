@@ -8,7 +8,8 @@ GSOAP_ROOT_DIR := /usr/share/gsoap/
 GSOAP_PLUGIN_DIR := $(GSOAP_ROOT_DIR)/plugin
 GSOAP_IMPORT_DIR := $(GSOAP_ROOT_DIR)/import
 ALL_CPP_FILES := $(wildcard *.cpp)
-ALL_HH_FILES := $(wildcard *.hh)
+#ALL_HH_FILES := $(wildcard *.hh)
+ALL_HH_FILES := includes-odb.hh
 ALL_C_FILES := $(wildcard *.c)
 COMPILERFLAGS := -fdiagnostics-color=always -W -Wall -Wno-unused-parameter
 STATIC_LIBS :=  /usr/lib/zbcl/libzbcl.a /usr/lib/`uname -i`-linux-gnu/libcrypt.a

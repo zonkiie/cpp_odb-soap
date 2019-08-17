@@ -1,5 +1,5 @@
-#ifndef __includes_odb__
-#define __includes_odb__
+#ifndef __includes_odb_header__
+#define __includes_odb_header__
 
 #include <vector>
 #include <string>
@@ -12,7 +12,6 @@
 #include <odb/tr1/memory.hxx>
 
 using std::tr1::shared_ptr;
-using std::tr1::weak_ptr;
 using std::string;
 using std::vector;
 
