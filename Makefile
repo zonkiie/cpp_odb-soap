@@ -1,5 +1,6 @@
 CXX := ccache $(CXX)
 CC := ccache $(CC)
+ODB := odb
 OUT_DIR := build
 INSTALL_DIR := ~/public_html/cpp_odb_soap/
 EXECUTABLE := $(OUT_DIR)/cpp_odb_soap.cgi
@@ -13,6 +14,7 @@ INCLUDE_DIRS :=  -I. -I$(OUT_DIR) -I$(GSOAP_ROOT_DIR) -I$(GSOAP_PLUGIN_DIR) -I/u
 LDFLAGS := -lgsoap++ -lgsoapssl++ -lcrypt -lpthread -lssl -lcrypto -lboost_filesystem -lboost_iostreams -lboost_signals -lboost_system -lpam
 CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
 CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
+ODBFLAGS := --hxx-suffix .hh --cxx-suffix .cpp --std c++11 -o $(OUT_DIR)
 GENERATED_SOURCE_FILES := $(OUT_DIR)/soapC.cpp $(OUT_DIR)/soapServer.cpp
 #GENERATED_SOURCE_FILES := $(wildcard build/*.cpp)
 ALL_SOURCE_FILES := $(ALL_CPP_FILES) $(ALL_C_FILES) $(GENERATED_SOURCE_FILES)
