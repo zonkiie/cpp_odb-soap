@@ -17,7 +17,7 @@ INCLUDE_DIRS :=  -I. -I$(OUT_DIR) -I$(GSOAP_ROOT_DIR) -I$(GSOAP_PLUGIN_DIR) -I/u
 LDFLAGS := -lgsoap++ -lgsoapssl++ -lcrypt -lpthread -lssl -lcrypto -lboost_filesystem -lboost_iostreams -lboost_signals -lboost_system -lpam
 CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
 CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
-ODBFLAGS := --hxx-suffix .hh --cxx-suffix .cpp --std c++11 -d common -m dynamic --generate-query --generate-schema  -I . -I $(GSOAP_IMPORT_DIR) -o $(OUT_DIR)
+ODBFLAGS := --hxx-suffix .hh --cxx-suffix .cpp --std c++11 -d common -d pgsql -d mysql -d sqlite -m dynamic --generate-query --generate-schema  -I . -I $(GSOAP_IMPORT_DIR) -o $(OUT_DIR)
 GENERATED_SOURCE_FILES := $(OUT_DIR)/soapC.cpp $(OUT_DIR)/soapServer.cpp
 #GENERATED_SOURCE_FILES := $(wildcard build/*.cpp)
 ALL_SOURCE_FILES := $(ALL_CPP_FILES) $(ALL_C_FILES) $(GENERATED_SOURCE_FILES)

@@ -57,7 +57,9 @@
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
 
+#include <odb/pgsql/database.hxx>
 //#include <odb/mysql/database.hxx>
+#include <odb/sqlite/database.hxx>
 
 
 // Include TR1 <memory> header in a compiler-specific fashion. Fall back
