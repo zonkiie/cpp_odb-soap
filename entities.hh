@@ -8,6 +8,7 @@ class user
 {
 private:
 	// Friend classes are put in [] brackets because these values are ignored by soapcpp2 parser.
+	// otherwise there will be errors like "‘class odb::access’ has no member named ‘soap_default’" and much more
 	[ friend class odb::access; ]
 	
 	user();

@@ -5,7 +5,7 @@
 //#include <soapH.h>  // include the generated source code headers
 
 // include XML namespaces
-#include <ns.nsmap> 
+//#include <ns.nsmap> 
 //#include <c14n.nsmap>
 
 #include <plugin/threads.h>

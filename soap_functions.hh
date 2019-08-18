@@ -18,7 +18,7 @@
 //gsoap ns2 service transport:  http://schemas.xmlsoap.org/soap/http
 
 //gsoap ns2 service method-action:      getusers "" 
-int ns__getusers(std::vector<user>& userlist);
+int ns__getusers(std::vector<std::string>& userlist);
 
 
 #endif
