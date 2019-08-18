@@ -56,7 +56,8 @@
 #include <odb/core.hxx>
 #include <odb/database.hxx>
 #include <odb/transaction.hxx>
-#include <odb/mysql/database.hxx>
+
+//#include <odb/mysql/database.hxx>
 
 
 // Include TR1 <memory> header in a compiler-specific fashion. Fall back
@@ -66,10 +67,9 @@
 
 using namespace std;
 
-/*namespace pf = plain_cpp::free_functions;
+namespace pf = plain_cpp::free_functions;
 
-using namespace pf;*/
-using namespace plain_cpp::free_functions;
+using namespace pf;
 
 using std::tr1::shared_ptr;
 
