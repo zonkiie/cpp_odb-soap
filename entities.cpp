@@ -29,13 +29,13 @@ domain::domain(string domainname)
 {
 	this->_domainname = domainname;
 }
-void domain::setuser(user& user_)
+void domain::owner(user& owner_)
 {
-	this->_user.reset(&user_);
+	this->_owner.reset(&owner_);
 }
-user domain::getuser()
+user domain::owner()
 {
-	return *(this->_user);
+	return *(this->_owner);
 }
 void domain::domainname(string domainname)
 {

@@ -11,10 +11,14 @@ int ns__getusers(struct soap* soap, vector<string>& userlist)
 int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 {
 	//odb::pgsql::database db ("john", "secret", "dummy whammy", "localhost");
-	odb::sqlite::database db ("/tmp/my.sqlite");
+	//odb::sqlite::database db ("/tmp/my.sqlite");
+	std::shared_ptr<database> db (new odb::sqlite::database("/tmp/my.sqlite"));
 	user john("John", "Doe");
-	transaction t (db.begin ());
+	domain d1("Johndoe.com");
+	d1.owner(john);
+	transaction t (db->begin ());
 	db->persist (john);
+	db->persist (d1);
 	t.commit ();
 
 	return SOAP_OK;

@@ -2,6 +2,7 @@ CXX := ccache $(CXX)
 CC := ccache $(CC)
 ODB := odb
 OUT_DIR := build
+VPATH = .:$(OUT_DIR)
 INSTALL_DIR := ~/public_html/cpp_odb_soap/
 EXECUTABLE := $(OUT_DIR)/cpp_odb_soap.cgi
 GSOAP_ROOT_DIR := /usr/share/gsoap/
@@ -17,13 +18,19 @@ INCLUDE_DIRS :=  -I. -I$(OUT_DIR) -I$(GSOAP_ROOT_DIR) -I$(GSOAP_PLUGIN_DIR) -I/u
 LDFLAGS := -lgsoap++ -lgsoapssl++ -lcrypt -lpthread -lssl -lcrypto -lboost_filesystem -lboost_iostreams -lboost_signals -lboost_system -lpam  -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb
 CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
 CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
-ODBFLAGS := --hxx-suffix .hh --cxx-suffix .cpp --std c++11 -d common -d pgsql -d mysql -d sqlite -m dynamic --generate-query --generate-schema  -I . -I $(GSOAP_IMPORT_DIR) -o $(OUT_DIR)
-GENERATED_SOURCE_FILES := $(OUT_DIR)/soapC.cpp $(OUT_DIR)/soapServer.cpp
+ODB_DBLIST := -d common -d pgsql -d mysql -d sqlite
+ODBFLAGS := --hxx-suffix .hh --cxx-suffix .cpp --std c++11 $(ODB_DBLIST) -m dynamic --generate-query --generate-schema  -I . -I $(GSOAP_IMPORT_DIR) -o $(OUT_DIR)
+GENERATED_SOAP_SOURCE_FILES := $(OUT_DIR)/soapC.cpp $(OUT_DIR)/soapServer.cpp
+GENERATED_ODB_SOURCE_FILES := 
 #GENERATED_SOURCE_FILES := $(wildcard build/*.cpp)
 ALL_SOURCE_FILES := $(ALL_CPP_FILES) $(ALL_C_FILES) $(GENERATED_SOURCE_FILES)
 #ALL_OBJECT_FILES := $(addprefix $(OUT_DIR)/, $(ALL_CPP_FILES:.cpp=.o))
 #ALL_OBJECT_FILES := $(ALL_SOURCE_FILES:.cpp=.o)
-ALL_OBJECT_FILES := $(ALL_CPP_FILES:%.cpp=$(OUT_DIR)/%.cpp.o) $(ALL_C_FILES:%.c=$(OUT_DIR)/%.c.o) $(GENERATED_SOURCE_FILES:.cpp=.o)
+ALL_OBJECT_FILES := $(ALL_CPP_FILES:%.cpp=$(OUT_DIR)/%.cpp.o) $(ALL_C_FILES:%.c=$(OUT_DIR)/%.c.o) $(GENERATED_SOAP_SOURCE_FILES:.cpp=.o)
+#ALL_OBJECT_FILES += $(OUT_DIR)/soapStub-odb-mysql.cpp.o 
+ALL_OBJECT_FILES += $(OUT_DIR)/soapStub-odb-pgsql.cpp.o
+ALL_OBJECT_FILES += $(OUT_DIR)/soapStub-odb-sqlite.cpp.o
+ALL_OBJECT_FILES += $(OUT_DIR)/soapStub-odb.cpp.o
 #wsseapi.o
 all: odb_files $(EXECUTABLE) | $(OUT_DIR)
 odb_files: $(ODB_HH_FILES) | $(OUT_DIR)
@@ -41,6 +48,14 @@ $(OUT_DIR)/%.cpp.o: %.cpp | $(OUT_DIR)
 	$(CXX) -c $(CXXFLAGS) $< -o $@
 $(OUT_DIR)/%.c.o: %.c | $(OUT_DIR)
 	$(CC) -c $(CFLAGS) $< -o $@
+$(OUT_DIR)/soapStub-odb-mysql.cpp.o: $(OUT_DIR)/soapStub-odb-mysql.cpp | $(OUT_DIR)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+$(OUT_DIR)/soapStub-odb-pgsql.cpp.o: $(OUT_DIR)/soapStub-odb-pgsql.cpp | $(OUT_DIR)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+$(OUT_DIR)/soapStub-odb-sqlite.cpp.o: $(OUT_DIR)/soapStub-odb-sqlite.cpp | $(OUT_DIR)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
+$(OUT_DIR)/soapStub-odb.cpp.o: $(OUT_DIR)/soapStub-odb.cpp | $(OUT_DIR)
+	$(CXX) -c $(CXXFLAGS) $< -o $@
 $(ALL_OBJECT_FILES): $(ALL_SOURCE_FILES) | $(OUT_DIR)
 mrproper: clean
 clean:

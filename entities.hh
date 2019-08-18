@@ -31,12 +31,12 @@ private:
 	domain(std::string domainname);
 	std::string _id;
 	std::string _domainname;
-	std::shared_ptr< user > _user;
+	std::shared_ptr< user > _owner;
 public:
 	std::string domainname();
 	void domainname(std::string domainname);
-	user getuser();
-	void setuser(user& user_);
+	user owner();
+	void owner(user& owner_);
 };
 
 #endif
