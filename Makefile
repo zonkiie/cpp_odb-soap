@@ -67,6 +67,8 @@ install: $(EXECUTABLE)
 
 uninstall:
 	-rm -rvf $(INSTALL_DIR)
+test: all
+	$(EXECUTABLE) --port 8080
 print:
 	@echo $(ALL_SOURCE_FILES)
 	@echo $(ALL_OBJECT_FILES)
