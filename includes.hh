@@ -62,13 +62,12 @@
 
 using namespace std;
 
-namespace pf = plain_cpp::free_functions;
+/*namespace pf = plain_cpp::free_functions;
 
-using namespace pf;
+using namespace pf;*/
+using namespace plain_cpp::free_functions;
 
 using std::tr1::shared_ptr;
-using std::string;
-using std::vector;
 
 
 #endif
