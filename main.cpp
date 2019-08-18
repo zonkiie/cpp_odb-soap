@@ -1,5 +1,5 @@
-#include <includes.h>
-#include <soap_includes.h>
+#include <includes.hh>
+#include <soap-includes.hh>
 #define debug 0
 
 /// for Program options,  @see https://github.com/boostorg/program_options/tree/develop/example

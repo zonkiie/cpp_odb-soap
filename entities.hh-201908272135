@@ -1,0 +1,50 @@
+#ifndef __entities__
+#define __entities__
+
+#ifndef ODB
+#endif
+
+class user;
+class domain;
+
+#pragma db object
+class user
+{
+private:
+#ifdef ODB
+	friend class odb::access;
+	
+	user(){};
+#pragma db id
+#endif
+	std::string _id;
+	std::string _firstname, _lastname;
+#ifdef ODB
+#pragma db value_not_null inverse(_user)
+#endif
+	std::vector< std::shared_ptr< domain > > domains;
+public:
+	std::string firstname() { return _firstname; }
+	void firstname(std::string firstname_) { _firstname = firstname_; }
+	std::string lastname() { return _lastname; }
+	void lastname(std::string lastname_) { _lastname = lastname_; }
+};
+
+#pragma db object
+class domain
+{
+private:
+	friend class odb::access;
+	domain(){};
+#pragma db id
+	std::string id;
+	std::string _domainname;
+#pragma db not_null
+	std::shared_ptr< user > _user;
+public:
+	std::string domainname() { return _domainname; }
+	void domainname(std::string domainname_) { _domainname = domainname_; }
+};
+
+#endif
+ 

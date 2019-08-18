@@ -1,48 +1,38 @@
-//#ifndef __entities__
-//#define __entities__
-
-#ifndef ODB
-#import "stlvector.h"
-#import "stdstring.h"
-#endif
+#ifndef __entities__
+#define __entities__
 
 class user;
 class domain;
 
-#pragma db object
 class user
 {
 private:
-	friend class odb::access;
+	// Friend classes are put in [] brackets because these values are ignored by soapcpp2 parser.
+	[ friend class odb::access; ]
 	
-	user(){}
-#pragma db id
-	std::string id;
-	std::string firstname, lastname;
-#pragma db value_not_null inverse(_user)
+	user();
+	std::string _id;
+	std::string _firstname, _lastname;
 	std::vector< std::shared_ptr< domain > > domains;
 public:
-	std::string firstname() { return firstname; }
-	void firstname(std::string firstname_) { firstname = firstname_; }
-	std::string lastname() { return lastname; }
-	void lastname(std::string lastname_) { lastname = lastname_; }
+	std::string firstname();
+	void firstname(std::string firstname_);
+	std::string lastname();
+	void lastname(std::string lastname_);
 };
 
-#pragma db object
 class domain
 {
 private:
-	friend class odb::access;
-	domain(){}
-#pragma db id
-	std::string id;
-	std::string domainname;
-#pragma db not_null
-	std::shared_ptr< user > user;
+	[ friend class odb::access; ]
+	domain();
+	std::string _id;
+	std::string _domainname;
+	std::shared_ptr< user > _user;
 public:
-	std::string domainname() { return domainname; }
-	void domainname(std::string domainname_) { domainname = domainname_; }
+	std::string domainname();
+	void domainname(std::string domainname_);
 };
 
-//#endif
+#endif
  
