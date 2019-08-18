@@ -54,6 +54,10 @@
 #include <string>
 
 #include <odb/core.hxx>
+#include <odb/database.hxx>
+#include <odb/transaction.hxx>
+#include <odb/mysql/database.hxx>
+
 
 // Include TR1 <memory> header in a compiler-specific fashion. Fall back
 // on the Boost implementation if the compiler does not support TR1.

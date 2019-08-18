@@ -20,5 +20,6 @@
 //gsoap ns2 service method-action:      getusers "" 
 int ns__getusers(std::vector<std::string>& userlist);
 
+int ns__getUserListDB(std::vector<user>& userlist);
 
 #endif
