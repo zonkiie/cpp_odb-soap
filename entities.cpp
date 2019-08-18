@@ -29,9 +29,9 @@ domain::domain(string domainname)
 {
 	this->_domainname = domainname;
 }
-void domain::setuser(user user_)
+void domain::setuser(user& user_)
 {
-	this->_user.reset(user_);
+	this->_user.reset(&user_);
 }
 user domain::getuser()
 {

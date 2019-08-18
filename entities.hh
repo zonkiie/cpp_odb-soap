@@ -36,7 +36,7 @@ public:
 	std::string domainname();
 	void domainname(std::string domainname);
 	user getuser();
-	void setuser(user user_);
+	void setuser(user& user_);
 };
 
 #endif
