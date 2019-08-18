@@ -34,6 +34,14 @@
 #include <misc_soap_functions.h>
 #include <soap_ssl_helpers.h>
 
+#include <zbcl/plain_cpp/free_functions/crypt-functions.hh>
+#include <zbcl/plain_cpp/free_functions/conversion.hh>
+#include <zbcl/plain_cpp/free_functions/exec-functions.hh>
+#include <zbcl/plain_cpp/free_functions/filesystem-functions.hh>
+#include <zbcl/plain_cpp/free_functions/file-functions.hh>
+#include <zbcl/plain_cpp/free_functions/user-admin.hh>
+#include <zbcl/plain_cpp/free_functions/apache-functions-ext.hh>
+
 #include <zbcl/plain_c/file-functions.h>
 #include <zbcl/plain_c/array-functions.h>
 #include <zbcl/plain_c/string-functions.h>
@@ -53,6 +61,10 @@
 #include <odb/tr1/memory.hxx>
 
 using namespace std;
+
+namespace pf = plain_cpp::free_functions;
+
+using namespace pf;
 
 using std::tr1::shared_ptr;
 using std::string;
