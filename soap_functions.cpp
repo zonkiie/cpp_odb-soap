@@ -14,7 +14,7 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 	odb::sqlite::database db ("/tmp/my.sqlite");
 	user john("John", "Doe");
 	transaction t (db.begin ());
-	
+	db->persist (john);
 	t.commit ();
 
 	return SOAP_OK;
