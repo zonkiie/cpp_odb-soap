@@ -14,7 +14,7 @@ ALL_C_FILES := $(wildcard *.c)
 COMPILERFLAGS := -fdiagnostics-color=always -W -Wall -Wno-unused-parameter
 STATIC_LIBS :=  /usr/lib/zbcl/libzbcl.a /usr/lib/`uname -i`-linux-gnu/libcrypt.a
 INCLUDE_DIRS :=  -I. -I$(OUT_DIR) -I$(GSOAP_ROOT_DIR) -I$(GSOAP_PLUGIN_DIR) -I/usr/include/zbcl
-LDFLAGS := -lgsoap++ -lgsoapssl++ -lcrypt -lpthread -lssl -lcrypto -lboost_filesystem -lboost_iostreams -lboost_signals -lboost_system -lpam
+LDFLAGS := -lgsoap++ -lgsoapssl++ -lcrypt -lpthread -lssl -lcrypto -lboost_filesystem -lboost_iostreams -lboost_signals -lboost_system -lpam  -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb
 CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
 CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
 ODBFLAGS := --hxx-suffix .hh --cxx-suffix .cpp --std c++11 -d common -d pgsql -d mysql -d sqlite -m dynamic --generate-query --generate-schema  -I . -I $(GSOAP_IMPORT_DIR) -o $(OUT_DIR)

@@ -68,6 +68,7 @@
 #include <odb/tr1/memory.hxx>
 
 using namespace std;
+using namespace odb::core;
 
 namespace pf = plain_cpp::free_functions;
 
