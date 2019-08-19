@@ -68,6 +68,10 @@
 //
 #include <odb/tr1/memory.hxx>
 
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
+
 using namespace std;
 using namespace odb::core;
 
@@ -75,7 +79,9 @@ namespace pf = plain_cpp::free_functions;
 
 using namespace pf;
 
-using std::tr1::shared_ptr;
-
+using std::shared_ptr;
+using std::weak_ptr;
+using std::unique_ptr;
+using namespace boost::uuids;
 
 #endif

@@ -13,6 +13,7 @@ private:
 	
 	user();
 	user(std::string firstname, std::string lastname);
+	~user();
 	std::string _id;
 	std::string _firstname, _lastname;
 	std::vector< std::shared_ptr< domain > > domains;
@@ -29,9 +30,10 @@ private:
 	[ friend class odb::access; ]
 	domain();
 	domain(std::string domainname);
+	~domain();
 	std::string _id;
 	std::string _domainname;
-	std::shared_ptr< user > _owner;
+[	std::weak_ptr< user > _owner; ]
 public:
 	std::string domainname();
 	void domainname(std::string domainname);
