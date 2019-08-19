@@ -16,7 +16,7 @@ private:
 	~user();
 	std::string _id;
 	std::string _firstname, _lastname;
-	std::vector< std::shared_ptr< domain > > domains;
+	std::vector< lazy_shared_ptr< domain > > domains;
 public:
 	std::string firstname();
 	void firstname(std::string firstname);
@@ -33,7 +33,7 @@ private:
 	~domain();
 	std::string _id;
 	std::string _domainname;
-[	std::weak_ptr< user > _owner; ]
+[	lazy_weak_ptr< user > _owner; ]
 public:
 	std::string domainname();
 	void domainname(std::string domainname);
