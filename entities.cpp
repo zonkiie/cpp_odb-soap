@@ -49,13 +49,13 @@ domain::~domain()
 }
 void domain::owner(user& owner_)
 {
-	//this->_owner.reset(&owner_);
-	this->_owner = make_shared<user>(owner_);
+	this->_owner.reset(&owner_);
+	//this->_owner = make_shared<user>(owner_);
 }
 user domain::owner()
 {
-	//return *(this->_owner);
-	return *(this->_owner.lock());
+	return *(this->_owner);
+	//return *(this->_owner.lock());
 }
 void domain::domainname(string domainname)
 {
