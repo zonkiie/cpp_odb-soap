@@ -12,9 +12,7 @@ user::user(string firstname, string lastname)
 	this->_firstname = firstname;
 	this->_lastname = lastname;
 }
-user::~user()
-{
-}
+user::~user() { }
 void user::firstname(string firstname)
 {
 	this->_firstname = firstname;
@@ -32,7 +30,6 @@ string user::lastname()
 	return this->_lastname;
 }
 
-
 domain::domain()
 {
 	random_generator gen;
@@ -44,9 +41,7 @@ domain::domain(string domainname)
 	this->_id = to_string(gen());
 	this->_domainname = domainname;
 }
-domain::~domain()
-{
-}
+domain::~domain() { }
 void domain::owner(user& owner_)
 {
 	this->_owner.reset(&owner_);

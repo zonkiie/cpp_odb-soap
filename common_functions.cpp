@@ -2,6 +2,7 @@
 
 char *progpath;
 char *progdir;
+shared_ptr<odb::database> db;
 
 bool check_credentials(struct soap* soap)
 {

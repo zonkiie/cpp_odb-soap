@@ -16,7 +16,7 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 		//odb::pgsql::database db ("john", "secret", "dummy whammy", "localhost");
 		//odb::sqlite::database db ("/tmp/my.sqlite");
 		cerr << __LINE__ << endl;
-		std::shared_ptr<database> db (new odb::sqlite::database(":memory:", SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE));
+		db.reset (new odb::sqlite::database(":memory:", SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE));
 		cerr << __LINE__ << endl;
 		odb::transaction t (db->begin ());
 		cerr << __LINE__ << endl;
@@ -54,7 +54,7 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 	catch (const odb::exception& e)
 	{
 		cerr << e.what () << endl;
-		return 403;
+		return 401;
 	}
 
 
