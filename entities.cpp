@@ -29,6 +29,11 @@ string user::lastname()
 {
 	return this->_lastname;
 }
+std::vector< std::weak_ptr< domain > > user::domains()
+{
+	return this->_domains;
+}
+
 
 domain::domain()
 {
@@ -44,8 +49,9 @@ domain::domain(string domainname)
 domain::~domain() { }
 void domain::owner(user& owner_)
 {
-	this->_owner.reset(&owner_);
-	//this->_owner = make_shared<user>(owner_);
+	//this->_owner.reset(make_shared<user>(owner_));
+	//this->_owner.reset(&owner_);
+	this->_owner = make_shared<user>(owner_);
 }
 user domain::owner()
 {

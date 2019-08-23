@@ -17,12 +17,13 @@ private:
 	std::string _id;
 	std::string _firstname, _lastname;
 	// std::vector< lazy_shared_ptr< domain > > domains;
-	std::vector< std::weak_ptr< domain > > domains;
+	std::vector< std::weak_ptr< domain > > _domains;
 public:
 	std::string firstname();
 	void firstname(std::string firstname);
 	std::string lastname();
 	void lastname(std::string lastname);
+	std::vector< std::weak_ptr< domain > > domains();
 };
 
 class domain

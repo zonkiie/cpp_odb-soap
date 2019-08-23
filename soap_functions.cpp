@@ -33,6 +33,16 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 			typedef odb::result<user> result;
 			result r (db->query<user> ());
 			userlist.assign(r.begin(), r.end());
+			for(user u: userlist)
+			{
+				vector<weak_ptr<domain>> domains = u.domains();
+				for(uint i = 0; i < domains.size(); i++)
+				{
+					domain d = *(domains[i].lock());
+					cerr << d.domainname();
+				}
+				cerr << u.firstname() << endl;
+			}
 		}
 		t.commit ();
 	}
