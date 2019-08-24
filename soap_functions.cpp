@@ -11,10 +11,8 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 {
 	try
 	{
-
+		session s;
 		//odb::pgsql::database db ("john", "secret", "dummy whammy", "localhost");
-		//odb::sqlite::database db ("/tmp/my.sqlite");
-		db.reset (new odb::sqlite::database(":memory:", SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE));
 		user john("John", "Doe");
 		domain d1("Johndoe.com");
 		domain d2("Johndoe.org");
@@ -33,16 +31,16 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 			typedef odb::result<user> result;
 			result r (db->query<user> ());
 			userlist.assign(r.begin(), r.end());
-			for(user u: userlist)
+			/*for(user u: userlist)
 			{
 				vector<weak_ptr<domain>> domains = u.domains();
 				for(uint i = 0; i < domains.size(); i++)
 				{
 					domain d = *(domains[i].lock());
-					cerr << d.domainname();
+					cerr << d.domainname() << endl;
 				}
 				cerr << u.firstname() << endl;
-			}
+			}*/
 		}
 		t.commit ();
 	}
@@ -60,10 +58,8 @@ int ns__getUserListDB2(struct soap* soap, vector<user>& userlist)
 {
 	try
 	{
-
+		session s;
 		//odb::pgsql::database db ("john", "secret", "dummy whammy", "localhost");
-		//odb::sqlite::database db ("/tmp/my.sqlite");
-		db.reset (new odb::sqlite::database(":memory:", SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE));
 		odb::transaction t (db->begin ());
 		odb::schema_catalog::create_schema (*db);
 		user john("John", "Doe");
@@ -92,3 +88,29 @@ int ns__getUserListDB2(struct soap* soap, vector<user>& userlist)
 
 	return SOAP_OK;
 }
+
+int ns__getDomainList(struct soap* soap, vector<domain>& domainlist)
+{
+	try
+	{
+		odb::transaction t (db->begin ());
+		{
+			typedef odb::query<domain> query;
+			typedef odb::result<domain> result;
+			result r (db->query<domain> ());
+			domainlist.assign(r.begin(), r.end());
+		}
+		t.commit ();
+		
+	}
+	catch (const odb::exception& e)
+	{
+		cerr << e.what () << endl;
+		return 401;
+	}
+
+
+	return SOAP_OK;
+	
+}
+

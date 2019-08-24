@@ -2,7 +2,7 @@
 
 char *progpath;
 char *progdir;
-shared_ptr<odb::database> db;
+shared_ptr<odb::database> db(new odb::sqlite::database(/*":memory:"*/"/dev/shm/my.db", SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE));
 
 bool check_credentials(struct soap* soap)
 {

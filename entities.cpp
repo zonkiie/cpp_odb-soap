@@ -29,11 +29,21 @@ string user::lastname()
 {
 	return this->_lastname;
 }
-std::vector< std::weak_ptr< domain > > user::domains()
+vector< domain > user::domains()
 {
 	return this->_domains;
 }
-
+// vector< weak_ptr< domain > > user::domains()
+// {
+// 	return this->_domains;
+// }
+// vector< shared_ptr <domain > > user::domains_s()
+// {
+// 	vector<shared_ptr<domain>> domains_s;
+// 	for(uint i = 0; i < this->_domains.size(); i++)
+// 		domains_s.push_back(make_shared<domain>(*(this->_domains[i].lock())));
+// 	return domains_s;
+// }
 
 domain::domain()
 {

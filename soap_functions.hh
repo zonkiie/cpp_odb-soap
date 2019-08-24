@@ -22,4 +22,6 @@ int ns__getusers(std::vector<std::string>& userlist);
 
 int ns__getUserListDB(std::vector<user>& userlist);
 
+int ns__getDomainList(std::vector<domain>& domainlist);
+
 #endif
