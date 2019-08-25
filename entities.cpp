@@ -5,14 +5,16 @@ user::user()
 	random_generator gen;
 	this->_id = to_string(gen());
 }
-user::user(string firstname, string lastname)
+user::user(string firstname, string lastname, string email)
 {
 	random_generator gen;
 	this->_id = to_string(gen());
 	this->_firstname = firstname;
 	this->_lastname = lastname;
+	this->_email = email;
 }
 user::~user() { }
+
 void user::firstname(string firstname)
 {
 	this->_firstname = firstname;
@@ -29,6 +31,14 @@ string user::lastname()
 {
 	return this->_lastname;
 }
+void user::email(string email)
+{
+	this->_email = email;
+}
+string user::email()
+{
+	return this->_email;
+}
 vector< domain > user::domains()
 {
 	return this->_domains;
@@ -36,13 +46,6 @@ vector< domain > user::domains()
 // vector< weak_ptr< domain > > user::domains()
 // {
 // 	return this->_domains;
-// }
-// vector< shared_ptr <domain > > user::domains_s()
-// {
-// 	vector<shared_ptr<domain>> domains_s;
-// 	for(uint i = 0; i < this->_domains.size(); i++)
-// 		domains_s.push_back(make_shared<domain>(*(this->_domains[i].lock())));
-// 	return domains_s;
 // }
 
 domain::domain()

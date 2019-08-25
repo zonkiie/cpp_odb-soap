@@ -12,18 +12,20 @@ private:
 	[ friend class odb::access; ]
 	
 	user();
-	user(std::string firstname, std::string lastname);
+	user(std::string firstname, std::string lastname, std::string email);
 	~user();
 	std::string _id;
-	std::string _firstname, _lastname;
-	std::vector< std::weak_ptr< domain > > _domains;
-	//std::vector<domain> _domains;
+	std::string _firstname, _lastname, _email;
+// 	std::vector< std::weak_ptr< domain > > _domains;
+	std::vector<domain> _domains;
 public:
 	std::string firstname();
 	void firstname(std::string firstname);
 	std::string lastname();
 	void lastname(std::string lastname);
-	//std::vector< std::shared_ptr< domain > > domains_s();
+	std::string email();
+	void email(std::string email);
+// 	std::vector< std::weak_ptr< domain > > domains();
 	std::vector<domain> domains();
 };
 
