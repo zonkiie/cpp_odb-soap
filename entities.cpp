@@ -39,14 +39,14 @@ string user::email()
 {
 	return this->_email;
 }
-vector< domain > user::domains()
-{
-	return this->_domains;
-}
-// vector< weak_ptr< domain > > user::domains()
+// vector< domain > & user::domains()
 // {
 // 	return this->_domains;
 // }
+vector< weak_ptr< domain > > user::domains()
+{
+	return this->_domains;
+}
 
 domain::domain()
 {
@@ -58,6 +58,13 @@ domain::domain(string domainname)
 	random_generator gen;
 	this->_id = to_string(gen());
 	this->_domainname = domainname;
+}
+domain::domain(string domainname, user& owner_)
+{
+	random_generator gen;
+	this->_id = to_string(gen());
+	this->_domainname = domainname;
+	this->_owner = make_shared<user>(owner_);
 }
 domain::~domain() { }
 void domain::owner(user& owner_)

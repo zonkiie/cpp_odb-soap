@@ -16,8 +16,8 @@ private:
 	~user();
 	std::string _id;
 	std::string _firstname, _lastname, _email;
-// 	std::vector< std::weak_ptr< domain > > _domains;
-	std::vector<domain> _domains;
+	std::vector< std::weak_ptr< domain > > _domains;
+// 	std::vector<domain> _domains;
 public:
 	std::string firstname();
 	void firstname(std::string firstname);
@@ -25,8 +25,8 @@ public:
 	void lastname(std::string lastname);
 	std::string email();
 	void email(std::string email);
-// 	std::vector< std::weak_ptr< domain > > domains();
-	std::vector<domain> domains();
+	std::vector< std::weak_ptr< domain > > domains();
+// 	std::vector<domain> &domains();
 };
 
 class domain
@@ -35,6 +35,7 @@ private:
 	[ friend class odb::access; ]
 	domain();
 	domain(std::string domainname);
+	domain(std::string domainname, user& owner_);
 	~domain();
 	std::string _id;
 	std::string _domainname;

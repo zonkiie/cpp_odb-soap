@@ -6,7 +6,7 @@ var_dump($client->__getFunctions());
 
 try{
     print_r($client->getUserListDB());
-    print_r($client->getDomainlist());
+//     print_r($client->getDomainlist());
 }
 catch(Exception $e)
 {

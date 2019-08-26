@@ -15,13 +15,11 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 		{
 			//odb::pgsql::database db ("john", "secret", "dummy whammy", "localhost");
 			user john("John", "Doe", "john.doe@example.com");
-			domain d1("Johndoe.com");
-			domain d2("Johndoe.org");
+			domain d1("Johndoe.com", john);
+			domain d2("Johndoe.org", john);
 			odb::transaction t (db->begin ());
 			t.tracer (stderr_tracer);
 			odb::schema_catalog::create_schema (*db);
-			d1.owner(john);
-			d2.owner(john);
 			db->persist (john);
 			db->persist (d1);
 			db->persist (d2);
