@@ -14,8 +14,7 @@ private:
 	user();
 	user(std::string firstname, std::string lastname, std::string email);
 	~user();
-	std::string _id;
-	std::string _firstname, _lastname, _email;
+	std::string _id, _firstname, _lastname, _email;
 	std::vector< std::shared_ptr< domain > > _domains;
 // 	std::vector<domain> _domains;
 public:
@@ -37,8 +36,7 @@ private:
 	domain(std::string domainname);
 	domain(std::string domainname, user& owner_);
 	~domain();
-	std::string _id;
-	std::string _domainname;
+	std::string _id, _domainname;
 [	std::shared_ptr< user > _owner; ]
 public:
 	std::string domainname();
