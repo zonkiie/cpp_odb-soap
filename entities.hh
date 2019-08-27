@@ -43,8 +43,8 @@ private:
 public:
 	std::string domainname();
 	void domainname(std::string domainname);
-	user owner();
-	void owner(user& owner_);
+[	user owner(); ]
+[	void owner(user& owner_); ]
 };
 
 #endif
