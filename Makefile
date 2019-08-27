@@ -13,9 +13,10 @@ ALL_CPP_FILES := $(wildcard *.cpp)
 ODB_HH_FILES := $(OUT_DIR)/soapStub.h
 ALL_C_FILES := $(wildcard *.c)
 COMPILERFLAGS := -fdiagnostics-color=always -W -Wall -Wno-unused-parameter
-STATIC_LIBS :=  /usr/lib/zbcl/libzbcl.a /usr/lib/`uname -i`-linux-gnu/libcrypt.a
+#STATIC_LIBS :=  /usr/lib/zbcl/libzbcl.a /usr/lib/`uname -i`-linux-gnu/libcrypt.a
+STATIC_LIBS :=
 INCLUDE_DIRS :=  -I. -I$(OUT_DIR) -I$(GSOAP_ROOT_DIR) -I$(GSOAP_PLUGIN_DIR) -I/usr/include/zbcl
-LDFLAGS := -lgsoap++ -lgsoapssl++ -lcrypt -lpthread -lssl -lcrypto -lboost_filesystem -lboost_iostreams -lboost_signals -lboost_system -lpam  -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb
+LDFLAGS := -L/usr/lib/zbcl -lcrypto -pthread -lgsoap -lgsoapssl -lgsoap++ -lgsoapssl++ -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb /usr/lib/zbcl/libzbcl.so
 CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
 CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
 ODB_DBLIST := -d common -d pgsql -d mysql -d sqlite

@@ -16,7 +16,7 @@ private:
 	~user();
 	std::string _id;
 	std::string _firstname, _lastname, _email;
-	std::vector< std::weak_ptr< domain > > _domains;
+	std::vector< std::shared_ptr< domain > > _domains;
 // 	std::vector<domain> _domains;
 public:
 	std::string firstname();
@@ -25,7 +25,7 @@ public:
 	void lastname(std::string lastname);
 	std::string email();
 	void email(std::string email);
-	std::vector< std::weak_ptr< domain > > domains();
+	std::vector< std::shared_ptr< domain > > domains();
 // 	std::vector<domain> &domains();
 };
 

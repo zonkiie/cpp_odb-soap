@@ -43,7 +43,7 @@ string user::email()
 // {
 // 	return this->_domains;
 // }
-vector< weak_ptr< domain > > user::domains()
+vector< shared_ptr< domain > > user::domains()
 {
 	return this->_domains;
 }
