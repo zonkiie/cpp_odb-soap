@@ -82,3 +82,58 @@ int ns__getDomainList(struct soap* soap, vector<domain>& domainlist)
 	
 }
 
+int ns__buildTree(struct soap* soap)
+{
+	try{
+		session s;
+		odb::transaction t (db->begin ());
+		t.tracer (stderr_tracer);
+		{
+			tree root("root");
+			tree child1_1("child1_1", root);
+			tree child1_2("child1_2", root);
+			tree_child2_1("child2_1", child1_1);
+			odb::schema_catalog::create_schema (*db);
+			db->persist (root);
+			db->persist (child1_1);
+			db->persist (child1_2);
+			db->persist (tree_child2_1);
+			
+		}
+		t.commit ();
+	}
+	catch (const odb::exception& e)
+	{
+		cerr << e.what () << endl;
+		return 401;
+	}
+
+
+	return SOAP_OK;
+}
+
+int ns__getTree(struct soap* soap, tree& tree)
+{
+	try
+	{
+		session s;
+		odb::transaction t (db->begin ());
+		{
+			typedef odb::query<tree> query;
+			typedef odb::result<tree> result;
+			result r (db->query<tree> (query::name == "root"));
+			tree.assign(r.begin(), r.end());
+		}
+		t.commit ();
+		
+	}
+	catch (const odb::exception& e)
+	{
+		cerr << e.what () << endl;
+		return 401;
+	}
+
+
+	return SOAP_OK;
+}
+

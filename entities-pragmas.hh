@@ -11,4 +11,10 @@
 #pragma db member(domain::_id) id
 #pragma db member(domain::_owner) not_null
 
+#pragma db object(tree)
+#pragma db object(tree) session pointer(std::shared_ptr)
+#pragma db member(tree::_id) id
+#pragma db member(tree::_parent) not_null
+#pragma db member(tree::_childs) value_not_null inverse(_parent) readonly
+
 #endif

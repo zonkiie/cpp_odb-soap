@@ -11,13 +11,13 @@ private:
 	// otherwise there will be errors like "‘class odb::access’ has no member named ‘soap_default’" and much more
 	[ friend class odb::access; ]
 	
-	user();
-	user(std::string firstname, std::string lastname, std::string email);
-	~user();
 	std::string _id, _firstname, _lastname, _email;
 	std::vector< std::shared_ptr< domain > > _domains;
 // 	std::vector<domain> _domains;
 public:
+	user();
+	user(std::string firstname, std::string lastname, std::string email);
+	~user();
 	std::string firstname();
 	void firstname(std::string firstname);
 	std::string lastname();
@@ -32,17 +32,32 @@ class domain
 {
 private:
 	[ friend class odb::access; ]
+	std::string _id, _domainname;
+[	std::shared_ptr< user > _owner; ]
+public:
 	domain();
 	domain(std::string domainname);
 	domain(std::string domainname, user& owner_);
 	~domain();
-	std::string _id, _domainname;
-[	std::shared_ptr< user > _owner; ]
-public:
 	std::string domainname();
 	void domainname(std::string domainname);
 [	user owner(); ]
 [	void owner(user& owner_); ]
+};
+
+class tree
+{
+private:
+	[ friend class odb::access; ]
+	std::string _id, _name;
+	std::vector< std::weak_ptr <tree> > _childs;
+[	std::shared_ptr < tree > _parent; ]
+public:
+	tree();
+	tree(std::string name_);
+	tree(std::string name_, tree& parent_);
+	std::string name();
+	void name(std::string name_);
 };
 
 #endif
