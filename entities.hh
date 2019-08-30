@@ -3,6 +3,7 @@
 
 class user;
 class domain;
+class tree;
 
 class user
 {
@@ -50,14 +51,17 @@ class tree
 private:
 	[ friend class odb::access; ]
 	std::string _id, _name;
-	std::vector< std::weak_ptr <tree> > _childs;
-[	std::shared_ptr < tree > _parent; ]
+	std::vector< std::shared_ptr <tree> > _childs;
+[	std::weak_ptr < tree > _parent; ]
+// 	std::vector< std::weak_ptr <tree> > _childs;
+// [	std::shared_ptr < tree > _parent; ]
 public:
 	tree();
 	tree(std::string name_);
 	tree(std::string name_, tree& parent_);
 	std::string name();
 	void name(std::string name_);
+	std::vector < std::shared_ptr < tree > > childs();
 };
 
 #endif

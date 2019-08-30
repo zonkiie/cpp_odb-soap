@@ -24,8 +24,8 @@ int ns__getUserListDB(std::vector<user>& userlist);
 
 int ns__getDomainList(std::vector<domain>& domainlist);
 
-int ns__buildTree(void);
+int ns__buildTree(bool& result);
 
-int ns__getTree(tree& tree);
+int ns__getTree(tree& tree_);
 
 #endif

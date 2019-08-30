@@ -82,37 +82,37 @@ int ns__getDomainList(struct soap* soap, vector<domain>& domainlist)
 	
 }
 
-int ns__buildTree(struct soap* soap)
+int ns__buildTree(struct soap* soap, bool& result)
 {
 	try{
 		session s;
 		odb::transaction t (db->begin ());
+		odb::schema_catalog::create_schema (*db);
 		t.tracer (stderr_tracer);
 		{
 			tree root("root");
 			tree child1_1("child1_1", root);
 			tree child1_2("child1_2", root);
-			tree_child2_1("child2_1", child1_1);
-			odb::schema_catalog::create_schema (*db);
+			tree child2_1("child2_1", child1_1);
 			db->persist (root);
 			db->persist (child1_1);
 			db->persist (child1_2);
-			db->persist (tree_child2_1);
-			
+			db->persist (child2_1);
 		}
 		t.commit ();
 	}
 	catch (const odb::exception& e)
 	{
 		cerr << e.what () << endl;
+		result = false;
 		return 401;
 	}
 
-
+	result = true;
 	return SOAP_OK;
 }
 
-int ns__getTree(struct soap* soap, tree& tree)
+int ns__getTree(struct soap* soap, tree& tree_)
 {
 	try
 	{
@@ -122,7 +122,11 @@ int ns__getTree(struct soap* soap, tree& tree)
 			typedef odb::query<tree> query;
 			typedef odb::result<tree> result;
 			result r (db->query<tree> (query::name == "root"));
-			tree.assign(r.begin(), r.end());
+			tree_ = *(r.begin());
+			//unique_ptr<tree> up tree_ = r.begin();
+			/*unique_ptr<tree> t ( db->query_one<tree> ( query::name == "root"));
+			tree_ = *t;*/
+
 		}
 		t.commit ();
 		

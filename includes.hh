@@ -58,6 +58,7 @@
 #include <odb/transaction.hxx>
 #include <odb/session.hxx>
 #include <odb/schema-catalog.hxx>
+#include <odb/nullable.hxx>
 
 #include <odb/pgsql/database.hxx>
 //#include <odb/mysql/database.hxx>
@@ -68,6 +69,8 @@
 // on the Boost implementation if the compiler does not support TR1.
 //
 #include <odb/tr1/memory.hxx>
+
+#include <boost/optional.hpp>
 
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>

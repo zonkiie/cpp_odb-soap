@@ -88,13 +88,17 @@ string domain::domainname()
 	return this->_domainname;
 }
 
-tree::tree() { }
+tree::tree()
+{
+	random_generator gen;
+	this->_id = to_string(gen());
+	this->_name = "";
+}
 tree::tree(string name_)
 {
 	random_generator gen;
 	this->_id = to_string(gen());
 	this->_name = name_;
-	this->_parent = make_shared<tree>(nullptr);
 }
 tree::tree(string name_, tree& parent_)
 {
@@ -114,3 +118,9 @@ string tree::name()
 	return this->_name;
 }
 
+vector < shared_ptr < tree > > tree::childs()
+{
+	cerr << "Childs\n";
+	//return *(this->_childs);
+	return this->_childs;
+}
