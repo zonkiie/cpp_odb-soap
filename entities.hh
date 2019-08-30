@@ -46,13 +46,20 @@ public:
 [	void owner(user& owner_); ]
 };
 
+// This is necessary for self referencing, cyclic structures
+typedef std::shared_ptr<tree> treeptr;
+
 class tree
 {
 private:
 	[ friend class odb::access; ]
 	std::string _id, _name;
-	std::vector< std::shared_ptr <tree> > _childs;
-[	std::weak_ptr < tree > _parent; ]
+// These two lines work in reading
+// 	std::vector< std::shared_ptr <tree> > _childs;
+// [	std::shared_ptr < tree > _parent; ]
+	std::vector<treeptr> _childs;
+[	treeptr _parent; ]
+	
 // 	std::vector< std::weak_ptr <tree> > _childs;
 // [	std::shared_ptr < tree > _parent; ]
 public:
@@ -61,7 +68,10 @@ public:
 	tree(std::string name_, tree& parent_);
 	std::string name();
 	void name(std::string name_);
-	std::vector < std::shared_ptr < tree > > childs();
+//	This line works in reading
+//	std::vector < std::shared_ptr < tree > > childs();
+	std::vector < treeptr > childs();
+	
 };
 
 #endif

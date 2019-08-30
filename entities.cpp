@@ -106,6 +106,7 @@ tree::tree(string name_, tree& parent_)
 	this->_id = to_string(gen());
 	this->_name = name_;
 	this->_parent = make_shared<tree>(parent_);
+	//this->_parent = parent_;
 }
 
 void tree::name(string name_)
@@ -118,7 +119,8 @@ string tree::name()
 	return this->_name;
 }
 
-vector < shared_ptr < tree > > tree::childs()
+//vector < shared_ptr < tree > > tree::childs()
+vector < treeptr > tree:: childs()
 {
 	cerr << "Childs\n";
 	//return *(this->_childs);
