@@ -105,7 +105,7 @@ int ns__buildTree(struct soap* soap, bool& result)
 	{
 		cerr << e.what () << endl;
 		result = false;
-		return 401;
+		return 409;
 	}
 
 	result = true;
@@ -134,7 +134,7 @@ int ns__getTree(struct soap* soap, tree& tree_)
 	catch (const odb::exception& e)
 	{
 		cerr << e.what () << endl;
-		return 401;
+		return 400;
 	}
 
 
