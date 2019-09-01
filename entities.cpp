@@ -119,10 +119,7 @@ string tree::name()
 	return this->_name;
 }
 
-//vector < shared_ptr < tree > > tree::childs()
-vector < treeptr > tree:: childs()
+vector < treeptr > tree::childs()
 {
-	cerr << "Childs\n";
-	//return *(this->_childs);
 	return this->_childs;
 }

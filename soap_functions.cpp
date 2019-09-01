@@ -88,7 +88,7 @@ int ns__buildTree(struct soap* soap, bool& result)
 		session s;
 		odb::transaction t (db->begin ());
 		odb::schema_catalog::create_schema (*db);
-		t.tracer (stderr_tracer);
+		//t.tracer (stderr_tracer);
 		{
 			tree root("root");
 			tree child1_1("child1_1", root);
