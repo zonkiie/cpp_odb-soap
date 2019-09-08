@@ -11,7 +11,7 @@ I will optimize this tutorial in the next time.
 When using smart pointers, it is highly recommened to define own types with typedefs, otherwise odb will create duplicated functions, definitions etc.
 Define friend odb class access with [] brackets as transient, because soapcpp2 will otherwise throw errors.
 Use data types which are known by both soapcpp2 and odb.
-It should be possible to include other headers in entities.hh and entities-pragmas.hh .
+It is possible to include other headers in entities.hh and entities-pragmas.hh .
 ### 2. Create Pragmas in external File
 soapcpp2 will not recognise pragmas, even if they are defined as transient (with the '[]' brackets). So put the pragmas in an external file. The odb Compiler allows to append Pragmas when compiling.
 ### 3. Create Functions
