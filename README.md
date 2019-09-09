@@ -1,7 +1,7 @@
 # cpp_odb-soap
 Example for combining ODB and GSOAP in C++ 
 
-# Required: [libzbcl]{https://zonkiies-big-collection-lib.sourceforge.io/}
+# Required: [libzbcl](https://zonkiies-big-collection-lib.sourceforge.io/)
 
 ## How to start with code generation etc
 The best strategy currenty is to take my example project and modify it, until the tutorial is complete.
