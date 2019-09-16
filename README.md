@@ -33,6 +33,7 @@ This is also already implemented in my Makefile.
 ### 6. Create Main File and support files etc
 A good staring point should be my main.cpp file, which can call every c and c++ soap function defined in soap_functions.hh.
 ### 7. Compile everything
+To use my Makefile, you need to install and configure ccache, the compiler cache. If you have to compile a code very often, you will be very happy about this cache.
 
 ## Problems which might be unsolvable
 ### 1. Lazy loading
