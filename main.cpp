@@ -144,6 +144,7 @@ int start_mt_queue(int argc, char **argv)
 			puts("--randfile=<randfile>");
 			puts("--serverid=<serverid>");
 			puts("--configfile=<configfile>, -c=<configfile>");
+			puts("--authrealm=<authrealm>");
 			puts("--dump-config");
 			exit(0);
 		}
