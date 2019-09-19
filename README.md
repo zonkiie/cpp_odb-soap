@@ -7,6 +7,7 @@ Example for combining ODB and GSOAP in C++
 The best strategy currenty is to take my example project and modify it, until the tutorial is complete.
 Also, use my Makefile.
 I will optimize this tutorial in the next time.
+Finding the solution cost me many try & error, so I try to explain the way so that others can work with my experience.
 ### 1. Create Entities (Header and Source Files)
 When using smart pointers, it is highly recommened to define own types with typedefs, otherwise odb will create duplicated functions, definitions etc.
 Define friend odb class access with [] brackets as transient, because soapcpp2 will otherwise throw errors.
