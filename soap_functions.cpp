@@ -141,3 +141,29 @@ int ns__getTree(struct soap* soap, tree& tree_)
 	return SOAP_OK;
 }
 
+int ns__getTreeA(struct soap* soap, shared_ptr<tree>& tree_)
+{
+	try
+	{
+		session s;
+		odb::transaction t (db->begin ());
+		{
+			typedef odb::query<tree> query;
+			typedef odb::result<tree> result;
+			result r (db->query<tree> (query::name == "root"));
+			tree_.reset(r.begin().load().get());
+
+		}
+		t.commit ();
+		
+	}
+	catch (const odb::exception& e)
+	{
+		cerr << e.what () << endl;
+		return 400;
+	}
+
+
+	return SOAP_OK;
+}
+

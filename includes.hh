@@ -52,6 +52,7 @@
 
 #include <vector>
 #include <string>
+#include <memory>
 
 #include <odb/core.hxx>
 #include <odb/database.hxx>
