@@ -8,8 +8,9 @@ try{
 //     print_r($client->getUserListDB());
 //     print_r($client->getDomainlist());
 	print_r($client->buildTree());
-	print_r($client->getTree());
-	print_r($client->getTreeA());
+// 	print_r($client->getTree());
+// 	print_r($client->getTreeA());
+	print_r($client->getTreeM());
 
 }
 catch(Exception $e)

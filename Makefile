@@ -43,7 +43,7 @@ $(EXECUTABLE): $(ALL_OBJECT_FILES) | $(OUT_DIR)
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
 $(OUT_DIR)/soapC.cpp $(OUT_DIR)/soapServer.cpp $(OUT_DIR)/soapStub.h: soap_functions.hh | $(OUT_DIR)
-	soapcpp2 -2 -b -x -SL -d$(OUT_DIR) -I$(GSOAP_IMPORT_DIR) -c++11 $<
+	soapcpp2 -2 -b -x -SL -Ec -Ed -d$(OUT_DIR) -I$(GSOAP_IMPORT_DIR) -c++11 $<
 $(OUT_DIR)/wsseapi.o: $(GSOAP_PLUGIN_DIR)/wsseapi.cpp
 $(OUT_DIR)/%.cpp.o: %.cpp | $(OUT_DIR)
 	$(CXX) -c $(CXXFLAGS) $< -o $@

@@ -29,4 +29,6 @@ int ns__buildTree(bool& result);
 int ns__getTree(tree& tree_);
 
 int ns__getTreeA(std::shared_ptr<tree>& tree_);
+
+int ns__getTreeM(tree* tree_);
 #endif
