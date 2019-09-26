@@ -150,12 +150,12 @@ int ns__getTreeA(struct soap* soap, shared_ptr<tree>& tree_)
 		{
 			typedef odb::query<tree> query;
 			typedef odb::result<tree> result;
-			result r (db->query<tree> (query::name == "root"));
-			tree_.reset(r.begin().load().get());
+			/*result r (db->query<tree> (query::name == "root"));
+			tree_.reset(r.begin().load().get());*/
+			tree_ = db->query_one<tree> (query::name == "root");
 
 		}
 		t.commit ();
-		
 	}
 	catch (const odb::exception& e)
 	{
@@ -176,13 +176,20 @@ int ns__getTreeM(struct soap* soap, tree* tree_)
 		{
 			typedef odb::query<tree> query;
 			typedef odb::result<tree> result;
-			result r (db->query<tree> (query::name == "root"));
-			soap_dup_tree(soap, tree_, r.begin().load().get());
+			//result r (db->query<tree> (query::name == "root"));
+			tree_ = (db->query_one<tree> (query::name == "root")).get();
+			/*for(result::iterator i(r.begin()); i != r.end(); ++i)
+			{
+				soap_dup_tree(soap, tree_, i.load().get());
+			}*/
+			//tree_ = r.begin().load().get();
+			
+			
+			/*soap_dup_tree(soap, tree_, r.begin().load().get());
 			soap_del_tree(r.begin().load().get());
-
+			*/
 		}
 		t.commit ();
-		
 	}
 	catch (const odb::exception& e)
 	{
