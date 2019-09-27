@@ -121,8 +121,9 @@ int ns__getTree(struct soap* soap, tree& tree_)
 		{
 			typedef odb::query<tree> query;
 			typedef odb::result<tree> result;
-			result r (db->query<tree> (query::name == "root"));
-			tree_ = *(r.begin());
+			tree_ = *(db->query_one<tree> (query::name == "root").get());
+			/*result r (db->query<tree> (query::name == "root"));
+			tree_ = *(r.begin());*/
 			//unique_ptr<tree> up tree_ = r.begin();
 			/*unique_ptr<tree> t ( db->query_one<tree> ( query::name == "root"));
 			tree_ = *t;*/

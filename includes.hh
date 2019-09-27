@@ -29,11 +29,6 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 
-#include <soap-includes.hh>
-#include <common_functions.h>
-#include <misc_soap_functions.h>
-#include <soap_ssl_helpers.h>
-
 #include <zbcl/plain_cpp/free_functions/crypt-functions.hh>
 #include <zbcl/plain_cpp/free_functions/conversion.hh>
 #include <zbcl/plain_cpp/free_functions/exec-functions.hh>
@@ -64,7 +59,7 @@
 #include <odb/pgsql/database.hxx>
 //#include <odb/mysql/database.hxx>
 #include <odb/sqlite/database.hxx>
-
+#include <odb/sqlite/connection-factory.hxx>
 
 // Include TR1 <memory> header in a compiler-specific fashion. Fall back
 // on the Boost implementation if the compiler does not support TR1.
@@ -76,6 +71,11 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
+
+#include <soap-includes.hh>
+#include <common_functions.h>
+#include <misc_soap_functions.h>
+#include <soap_ssl_helpers.h>
 
 using namespace std;
 using namespace odb::core;
