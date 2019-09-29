@@ -3,7 +3,8 @@
 char *progpath;
 char *progdir;
 // unique_ptr<odb::sqlite::connection_factory> factory (new odb::sqlite::connection_pool_factory (20));
-shared_ptr<odb::database> db(new odb::sqlite::database(":memory:", SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, true, ""));
+//shared_ptr<odb::database> db(new odb::sqlite::database(":memory:", SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE, true, ""));
+//shared_ptr<odb::database> db(new odb::pgsql::database("dbuser", "dbpassword", "database", "dbhost"));
 
 //shared_ptr<odb::database> db(new odb::sqlite::database(":memory:"/*"/dev/shm/my.db"*/, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE));
 

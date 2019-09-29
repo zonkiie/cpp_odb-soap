@@ -1,6 +1,8 @@
 #ifndef __entities_pragmas__
 #define __entities_pragmas__
 
+#pragma db namespace schema("public")
+
 #pragma db object(user) 
 #pragma db object(user) session pointer(std::shared_ptr)
 #pragma db member(user::_id) id
