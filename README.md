@@ -42,9 +42,13 @@ When creating cyclic or self referencing objects, parent objects are sent via so
 
 ## Testing
 The Test Program is a PHP script, because PHP has a very easy-to-use SOAP Client and with print_r we can see the structures result.
+To debug memory errors, use the memory debugger valgrind.
 
 Use this command line to check the Server process for memory errors:
-    valgrind --show-leak-kinds=all --leak-check=full ./build/cpp_odb_soap.cgi --port=8080
+    valgrind --show-leak-kinds=all --leak-check=full --track-origins=yes ./build/cpp_odb_soap.cgi --port=8080
+If you want to log the results into a text file, set 
+	--log-file=logfile.txt
+as valgrind option.
 Open another terminal window, chage to this project's php subdir and call
     php main.php
 
