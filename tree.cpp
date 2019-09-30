@@ -21,6 +21,10 @@ tree::tree(string name_, tree& parent_)
 	//this->_parent = parent_;
 }
 
+tree::~tree()
+{
+}
+
 void tree::name(string name_)
 {
 	this->_name = name_;
