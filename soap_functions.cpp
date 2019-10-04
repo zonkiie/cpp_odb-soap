@@ -155,7 +155,6 @@ int ns__getTreeA(struct soap* soap, shared_ptr<tree>& tree_)
 			tree_.reset(r.begin().load().get());
 			tree_ = db->query_one<tree> (query::name == "root");*/
 			tree_.reset((db->query_one<tree> (query::name == "root")).get());
-
 		}
 		t.commit ();
 	}

@@ -76,6 +76,6 @@ int parse_configstring(const char * line, char * key, char * value)
 string generate_uuid()
 {
 	random_generator gen;
-// 	return boost::lexical_cast<std::string>(gen());
-	return to_string(gen());
+ 	return boost::lexical_cast<std::string>(gen());
+// 	return to_string(gen());
 }
