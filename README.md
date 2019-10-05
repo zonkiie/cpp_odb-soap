@@ -42,7 +42,7 @@ When creating cyclic or self referencing objects, parent objects are sent via so
 If using smart pointers on return variables, there is no unneccessary data transfer.
 
 ### 2. Memory Leak
-In this example, there is a small memory leak of 386 Bytes per query. The solution is hard to find. If no programmable solution is possible, one solution would be to restart the process if memory usage is to large.
+In this example, there is a small memory leak of 386 Bytes per query. The solution is hard to find. If no programmable solution is possible, one solution would be to restart the process if memory usage is too large.
 
 ## Testing
 The Test Program is a PHP script, because PHP has a very easy-to-use SOAP Client and with print_r we can see the structures result.
