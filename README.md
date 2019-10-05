@@ -39,6 +39,10 @@ To use my Makefile, you need to install and configure ccache, the compiler cache
 ## Problems which might be unsolvable
 ### 1. Lazy loading
 When creating cyclic or self referencing objects, parent objects are sent via soap. So it seems to create endless loading, bit it's not endless loading. It's read for some levels from the Result Cache, so the database roundtrips are keept to a minimum. (It's in strong contrast to PHP's doctrine ORM, which loads really infinitely.) As we can't use every datatype, it's maybe unsolvable. The transfered data amount is larger than needed, so we have here a little inefficiency.
+If using smart pointers on return variables, there is no unneccessary data transfer.
+
+### 2. Memory Leak
+In this example, there is a small memory leak of 386 Bytes per query. The solution is hard to find. If no programmable solution is possible, one solution would be to restart the process if memory usage is to large.
 
 ## Testing
 The Test Program is a PHP script, because PHP has a very easy-to-use SOAP Client and with print_r we can see the structures result.
