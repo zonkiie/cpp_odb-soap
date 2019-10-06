@@ -3,6 +3,8 @@ Example for combining ODB and GSOAP in C++
 
 # Required: [libzbcl](https://zonkiies-big-collection-lib.sourceforge.io/)
 
+libzbcl is only required for the autorization code (which is not used in this example but compiled) and the file size detection.
+
 ## How to start with code generation etc
 The best strategy currenty is to take my example project and modify it, until the tutorial is complete.
 Also, use my Makefile.
@@ -35,6 +37,8 @@ This is also already implemented in my Makefile.
 A good staring point should be my main.cpp file, which can call every c and c++ soap function defined in soap_functions.hh.
 ### 7. Compile everything
 To use my Makefile, you need to install and configure ccache, the compiler cache. If you have to compile a code very often, you will be very happy about this cache.
+
+The best is to look to the example code ans Makefile it it's not explained in this README file.
 
 ## Problems which might be unsolvable
 ### 1. Lazy loading
