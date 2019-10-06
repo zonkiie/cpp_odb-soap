@@ -55,6 +55,7 @@
 #include <odb/session.hxx>
 #include <odb/schema-catalog.hxx>
 #include <odb/nullable.hxx>
+#include <odb/lazy-ptr.hxx>
 
 #include <odb/pgsql/database.hxx>
 //#include <odb/mysql/database.hxx>
