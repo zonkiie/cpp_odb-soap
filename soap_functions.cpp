@@ -178,6 +178,7 @@ int ns__getTreeM(struct soap* soap, tree* tree_)
 			typedef odb::query<tree> query;
 			typedef odb::result<tree> result;
 			unique_ptr<tree> tmp_tree((db->query_one<tree> (query::name == "root")).get());
+			//tree_ = soap_dup_tree(soap, NULL, tmp_tree.get());
 			soap_dup_tree(soap, tree_, tmp_tree.get());
 			/*tree* tmp_tree = (db->query_one<tree> (query::name == "root")).get();
 			soap_dup_tree(soap, tree_, tmp_tree);
