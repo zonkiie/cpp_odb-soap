@@ -1,21 +1,13 @@
 #include <includes.hh>
 
-tree::tree()
+tree::tree() : _id(generate_uuid()), _name("")
 {
-	this->_id = generate_uuid();
-	this->_name = "";
 }
-tree::tree(string name_)
+tree::tree(string name_) : _id(generate_uuid()), _name(name_)
 {
-	this->_id = generate_uuid();
-	this->_name = name_;
 }
-tree::tree(string name_, tree& parent_)
+tree::tree(string name_, tree& parent_) : _id(generate_uuid()), _name(name_), _parent(make_shared<tree>(parent_))
 {
-	this->_id = generate_uuid();
-	this->_name = name_;
-	this->_parent = make_shared<tree>(parent_);
-	//this->_parent = parent_;
 }
 
 tree::~tree()
