@@ -142,7 +142,7 @@ int ns__getTree(struct soap* soap, tree& tree_)
 	return SOAP_OK;
 }
 
-int ns__getTreeA(struct soap* soap, shared_ptr<tree>& tree_)
+int ns__getTreeA(struct soap* soap, treeptr& tree_)
 {
 	try
 	{
