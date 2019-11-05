@@ -57,6 +57,9 @@ Use this command line to check the Server process for memory errors:
 If you want to log the results into a text file, set 
 	--log-file=logfile.txt
 as valgrind option.
+If you want to increase the function call stack, set
+    --num-callers=<num>
+as another valgrind option.
 Open another terminal window, chage to this project's php subdir and call
     php main.php
 
