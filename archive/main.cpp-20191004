@@ -296,8 +296,7 @@ void *process_queue(void *soap)
 		soap_destroy(tsoap); 
 		soap_end(tsoap); 
 		if(debug) fprintf(stderr, "served\n"); 
-	}
-	//soap_free(tsoap);
+	} 
 	return NULL; 
 } 
 /* add job (socket with pending request) to queue */
