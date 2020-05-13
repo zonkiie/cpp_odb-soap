@@ -16,7 +16,8 @@ COMPILERFLAGS := -fdiagnostics-color=always -W -Wall -Wno-unused-parameter
 #STATIC_LIBS :=  /usr/lib/zbcl/libzbcl.a /usr/lib/`uname -i`-linux-gnu/libcrypt.a
 STATIC_LIBS :=
 INCLUDE_DIRS :=  -I. -I$(OUT_DIR) -I$(GSOAP_ROOT_DIR) -I$(GSOAP_PLUGIN_DIR) -I/usr/include/zbcl
-LDFLAGS := -L/usr/lib/zbcl -lcrypto -pthread -lgsoap -lgsoapssl -lgsoap++ -lgsoapssl++ -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb /usr/lib/zbcl/libzbcl.so
+LDFLAGS := -L/usr/lib/zbcl
+LDLIBS := -lcrypto -pthread -lgsoap -lgsoapssl -lgsoap++ -lgsoapssl++ -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb /usr/lib/zbcl/libzbcl.so
 CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
 CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
 ODB_DBLIST := -d common -d pgsql -d mysql -d sqlite
@@ -39,7 +40,7 @@ odb_files: $(ODB_HH_FILES) | $(OUT_DIR)
 #$(EXECUTABLE): $(OUT_DIR) $(ALL_SOURCE_FILES)
 #	g++ $(CXXFLAGS) -o $@ $(ALL_SOURCE_FILES) $(LDFLAGS)
 $(EXECUTABLE): $(ALL_OBJECT_FILES) | $(OUT_DIR)
-	$(CXX) -std=c++11 -o $@ $(ALL_OBJECT_FILES) $(LDFLAGS) $(STATIC_LIBS)
+	$(CXX) -std=c++11 -o $@ $(ALL_OBJECT_FILES) $(LDFLAGS) $(LDLIBS) $(STATIC_LIBS)
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
 $(OUT_DIR)/soapC.cpp $(OUT_DIR)/soapServer.cpp $(OUT_DIR)/soapStub.h: soap_functions.hh | $(OUT_DIR)
