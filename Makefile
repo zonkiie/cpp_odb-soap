@@ -17,9 +17,10 @@ COMPILERFLAGS := -fdiagnostics-color=always -W -Wall -Wno-unused-parameter
 STATIC_LIBS :=
 INCLUDE_DIRS :=  -I. -I$(OUT_DIR) -I$(GSOAP_ROOT_DIR) -I$(GSOAP_PLUGIN_DIR) -I/usr/include/zbcl
 LDFLAGS := -L/usr/lib/zbcl
-LDLIBS := -lcrypto -pthread -lgsoap -lgsoapssl -lgsoap++ -lgsoapssl++ -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb /usr/lib/zbcl/libzbcl.so
-CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
-CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL $(INCLUDE_DIRS)
+LDLIBS := -pthread -lcrypto -lssl -lgsoap -lgsoapssl -lgsoap++ -lgsoapssl++ -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb -lzbcl
+#/usr/lib/zbcl/libzbcl.so
+CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL -DWITH_DOM -DWITH_GZIP $(INCLUDE_DIRS)
+CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL -DWITH_DOM -DWITH_GZIP $(INCLUDE_DIRS)
 ODB_DBLIST := -d common -d pgsql -d mysql -d sqlite
 ODBFLAGS := --hxx-suffix .hh --cxx-suffix .cpp --std c++11 $(ODB_DBLIST) -m dynamic --schema-format embedded --generate-query --generate-schema  --generate-session -I . -I $(GSOAP_IMPORT_DIR) -o $(OUT_DIR)
 GENERATED_SOAP_SOURCE_FILES := $(OUT_DIR)/soapC.cpp $(OUT_DIR)/soapServer.cpp
