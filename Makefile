@@ -17,7 +17,7 @@ COMPILERFLAGS := -fdiagnostics-color=always -W -Wall -Wno-unused-parameter
 STATIC_LIBS :=
 INCLUDE_DIRS :=  -I. -I$(OUT_DIR) -I$(GSOAP_ROOT_DIR) -I$(GSOAP_PLUGIN_DIR) -I/usr/include/zbcl
 LDFLAGS := -L/usr/lib/zbcl
-LDLIBS := -lpthread -lm -ldl -lrt -lzbcl -lcrypto -lssl -lgsoap -lgsoapssl -lgsoap++ -lgsoapssl++ -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb
+LDLIBS := -lpthread -lgsoap -lgsoapssl -lgsoap++ -lgsoapssl++ -lm -ldl -lrt -lzbcl -lcrypto -lssl -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb
 #/usr/lib/zbcl/libzbcl.so
 CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL -DWITH_DOM -DWITH_GZIP $(INCLUDE_DIRS)
 CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL -DWITH_DOM -DWITH_GZIP $(INCLUDE_DIRS)
