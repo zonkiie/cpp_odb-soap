@@ -17,8 +17,9 @@
 //gsoap ns2 service namespace:  urn:cpp_odb_soap
 //gsoap ns2 service transport:  http://schemas.xmlsoap.org/soap/http
 
-//gsoap ns2 service method-action:      getusers "" 
-int ns__getusers(std::vector<std::string>& userlist);
+/*gsoap ns2 service method-action:      getusers "" */
+
+//int ns__getusers(std::vector<std::string>& userlist);
 
 int ns__getUserListDB(std::vector<user>& userlist);
 

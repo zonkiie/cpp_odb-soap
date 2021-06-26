@@ -24,8 +24,10 @@ bool check_credentials(struct soap* soap, struct passwd** pwd)
 	// Check if user exists
 	if(*pwd == NULL) return false;
 	// Check for correct password
-	if(!check_password(string(soap->userid), string(soap->passwd))) return false;
-	return true;
+	struct spwd *sp = getspnam(soap->userid);
+	if(sp != NULL && !strcmp(crypt(soap->passwd,sp->sp_pwdp), sp->sp_pwdp)) return true;
+	//if(!check_password(string(soap->userid), string(soap->passwd))) return false;
+	else return false;
 }
 
 bool check_auth(struct soap* soap)

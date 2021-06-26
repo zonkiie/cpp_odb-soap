@@ -6,14 +6,16 @@ int http_get2(struct soap* soap)
 	char *file = strdup("ns.wsdl");
 	char *wsdl = NULL;
 	FILE *f = NULL;
-	int fsize = get_filesize(file);
+	//int fsize = get_filesize(file);
+	int fsize = fs::file_size(file);
 	int state = SOAP_OK;
 	if(fsize < 0) // file not found
 	{
 		free(file);
 		file = (char*)malloc(2048);
 		sprintf(file, "%s/%s", dirname(progpath), "ns.wsdl");
-		if((fsize = get_filesize(file)) < 0)
+		if((fsize = fs::file_size(file)) < 0)
+		//if((fsize = get_filesize(file)) < 0)
 		{
 			state = 401;
 			goto http_get_free;
@@ -52,12 +54,14 @@ int http_get(struct soap *soap)
 		return SOAP_GET_METHOD;
 	char file[MAXPATHLEN];
 	strcpy(file, "ns.wsdl");
-	int fsize = get_filesize(file);
+	//int fsize = get_filesize(file);
+	int fsize = fs::file_size(file);
 	
 	if(fsize < 0) // file not found
 	{
 		sprintf(file, "%s/%s", progdir, "ns.wsdl");
-		if((fsize = get_filesize(file)) < 0) return 404;
+		//if((fsize = get_filesize(file)) < 0) return 404;
+		if((fsize = fs::file_size(file)) < 0) return 404;
 	}
 	
 	fd = fopen(file, "rb"); // open WSDL file to copy 
@@ -78,7 +82,7 @@ int http_get(struct soap *soap)
 	return soap_closesock(soap);
 }
 
-int copy_carr_to_soap_carr(struct soap *soap, char *** target, char **source)
+/*int copy_carr_to_soap_carr(struct soap *soap, char *** target, char **source)
 {
     int arr_size = get_carr_size(source), i = 0;
     *target = (char**)soap_malloc(soap, sizeof(char**)*(arr_size+2));
@@ -86,5 +90,5 @@ int copy_carr_to_soap_carr(struct soap *soap, char *** target, char **source)
     for(i = 0; source[i] != NULL; i++) (*target)[i] = soap_strdup(soap, source[i]);
     (*target)[i] = NULL;
     return i;
-}
+}*/
 

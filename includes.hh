@@ -29,6 +29,7 @@
 #include <sys/wait.h>
 #include <sys/time.h>
 
+/*
 #include <zbcl/plain_cpp/free_functions/crypt-functions.hh>
 #include <zbcl/plain_cpp/free_functions/conversion.hh>
 #include <zbcl/plain_cpp/free_functions/exec-functions.hh>
@@ -43,7 +44,7 @@
 #include <zbcl/plain_c/apache-functions-ext.h>
 #include <zbcl/plain_c/user-functions.h>
 #include <zbcl/plain_c/time-functions.h>
-
+*/
 
 #include <vector>
 #include <string>
@@ -73,6 +74,7 @@
 #include <boost/uuid/uuid.hpp>
 #include <boost/uuid/uuid_generators.hpp>
 #include <boost/uuid/uuid_io.hpp>
+#include <boost/filesystem/operations.hpp>
 
 #include <soap-includes.hh>
 #include <common_functions.h>
@@ -82,13 +84,15 @@
 using namespace std;
 using namespace odb::core;
 
-namespace pf = plain_cpp::free_functions;
+//namespace pf = plain_cpp::free_functions;
 
-using namespace pf;
+//using namespace pf;
 
 using std::shared_ptr;
 using std::weak_ptr;
 using std::unique_ptr;
 using namespace boost::uuids;
+
+namespace fs = boost::filesystem;
 
 #endif
