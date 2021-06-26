@@ -18,8 +18,8 @@ STATIC_LIBS :=
 INCLUDE_DIRS :=  -I. -I$(OUT_DIR) -I$(GSOAP_ROOT_DIR) -I$(GSOAP_PLUGIN_DIR) -I/usr/include/zbcl
 #LDFLAGS := -L/usr/lib/zbcl
 LDFLAGS := 
-#LDLIBS := -lzbcl
-LDLIBS := -lpthread -lgsoap -lgsoapssl -lgsoap++ -lgsoapssl++ -lm -ldl -lrt -lcrypt -lcrypto -lssl -lboost_filesystem -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb
+#LDLIBS := -lzbcl -lgsoap -lgsoapssl
+LDLIBS := -lpthread -lgsoap++ -lgsoapssl++ -lm -ldl -lrt -lcrypt -lcrypto -lssl -lboost_filesystem -lodb-sqlite -lodb-pgsql -lodb-mysql -lodb
 #/usr/lib/zbcl/libzbcl.so
 CXXFLAGS := $(COMPILERFLAGS) -std=c++11 -g -D WITH_IPV6 -DWITH_OPENSSL -DWITH_DOM -DWITH_GZIP $(INCLUDE_DIRS)
 CFLAGS := $(COMPILERFLAGS) -g -D WITH_IPV6 -DWITH_OPENSSL -DWITH_DOM -DWITH_GZIP $(INCLUDE_DIRS)

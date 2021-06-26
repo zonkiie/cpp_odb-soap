@@ -38,6 +38,8 @@ To use my Makefile, you need to install and configure ccache, the compiler cache
 
 The best is to look to the example code ans Makefile it it's not explained in this README file.
 
+Note: Don't add -lgsoap -lgsoapssl to LDLIBS because it creates undefined symbols.
+
 ## Problems which might be unsolvable
 ### 1. Lazy loading
 When creating cyclic or self referencing objects, parent objects are sent via soap. So it seems to create endless loading, bit it's not endless loading. It's read for some levels from the Result Cache, so the database roundtrips are keept to a minimum. (It's in strong contrast to PHP's doctrine ORM, which loads really infinitely.) As we can't use every datatype, it's maybe unsolvable. The transfered data amount is larger than needed, so we have here a little inefficiency.
