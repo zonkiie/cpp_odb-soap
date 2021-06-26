@@ -53,7 +53,8 @@ int http_get(struct soap *soap)
 	if (!s || strcmp(s, "?wsdl")) 
 		return SOAP_GET_METHOD;
 	char file[MAXPATHLEN];
-	strcpy(file, "ns.wsdl");
+	snprintf(file, sizeof(file), "%s/%s", progdir, "ns.wsdl");
+	//strcpy(file, "ns.wsdl");
 	//int fsize = get_filesize(file);
 	int fsize = fs::file_size(file);
 	

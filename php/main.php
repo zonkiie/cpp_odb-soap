@@ -5,8 +5,9 @@ include_once("init.php");
 var_dump($client->__getFunctions());
 
 try{
-//     print_r($client->getUserListDB());
-//     print_r($client->getDomainlist());
+	print_r($client->getUserListDB());
+	print_r($client->getDomainlist());
+	exit;
 	print_r($client->buildTree());
 // 	print_r($client->getTree());
 	print_r($client->getTreeA());
