@@ -3,6 +3,7 @@
 include_once("init.php");
 
 var_dump($client->__getFunctions());
+exit;
 
 try{
 	print_r($client->getUserListDB());
