@@ -1,9 +1,7 @@
 # cpp_odb-soap
 Example for combining ODB and GSOAP in C++ 
 
-# Required: [libzbcl](https://zonkiies-big-collection-lib.sourceforge.io/)
-
-libzbcl is only required for the autorization code (which is not used in this example but compiled) and the file size detection.
+# Required: libboost-filesystem for filesize detection
 
 ## How to start with code generation etc
 The best strategy currenty is to take my example project and modify it, until the tutorial is complete.
