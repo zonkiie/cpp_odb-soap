@@ -29,9 +29,7 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 		{
 			odb::transaction t (db->begin ());
 			t.tracer (stderr_tracer);
-			typedef odb::query<user> query;
-			typedef odb::result<user> result;
-			result r (db->query<user> ());
+			odb::result<user> r (db->query<user> ());
 			userlist.assign(r.begin(), r.end());
 			/*for(user u: userlist)
 			{
@@ -63,9 +61,7 @@ int ns__getDomainList(struct soap* soap, vector<domain>& domainlist)
 		session s;
 		odb::transaction t (db->begin ());
 		{
-			typedef odb::query<domain> query;
-			typedef odb::result<domain> result;
-			result r (db->query<domain> ());
+			odb::result<domain> r (db->query<domain> ());
 			domainlist.assign(r.begin(), r.end());
 		}
 		t.commit ();

@@ -19,7 +19,7 @@ public:
 	tree();
 	tree(std::string name_);
 	tree(std::string name_, tree& parent_);
-	~tree();
+	virtual ~tree();
 	std::string name();
 	void name(std::string name_);
 //	This line works in reading

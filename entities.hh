@@ -17,7 +17,7 @@ private:
 public:
 	user();
 	user(std::string firstname, std::string lastname, std::string email);
-	~user();
+	virtual ~user();
 	std::string firstname();
 	void firstname(std::string firstname);
 	std::string lastname();
@@ -38,7 +38,7 @@ public:
 	domain();
 	domain(std::string domainname);
 	domain(std::string domainname, user& owner_);
-	~domain();
+	virtual ~domain();
 	std::string domainname();
 	void domainname(std::string domainname);
 [	user owner(); ]

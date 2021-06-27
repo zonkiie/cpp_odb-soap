@@ -3,7 +3,7 @@
 #define __soap_functions__
 
 //#import "wsse.h"
-#import "stlvector.h"
+#import "stl.h"
 #import "entities.hh"
 
 //gsoap ns2 schema namespace:   urn:ns
