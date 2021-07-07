@@ -250,7 +250,7 @@ int start_mt_queue(int argc, char **argv)
 			s = soap_accept(&soap);
 			if (soap_valid_socket(s)) 
 			{
-				if(debug) fprintf(stderr, "Thread %d accepts socket %d connection from IP %ld.%ld.%ld.%ld\n", i, s, (soap.ip>>24)&0xFF, (soap.ip>>16)&0xFF, (soap.ip>>8)&0xFF, soap.ip&0xFF); 
+				if(debug) fprintf(stderr, "Thread %d accepts socket %d connection from IP %u.%u.%u.%u\n", i, s, (soap.ip>>24)&0xFF, (soap.ip>>16)&0xFF, (soap.ip>>8)&0xFF, soap.ip&0xFF); 
 				enqueue(s);
 			}
 			else if (soap.errnum) // accept failed, try again after 1 second
