@@ -15,6 +15,8 @@ private:
 	std::vector< std::shared_ptr< domain > > _domains;
 // 	std::vector<domain> _domains;
 public:
+	//struct soap *soap;
+	
 	user();
 	user(std::string firstname, std::string lastname, std::string email);
 	virtual ~user();
@@ -35,6 +37,8 @@ private:
 	std::string _id, _domainname;
 [	std::shared_ptr< user > _owner; ]
 public:
+	//struct soap *soap;
+	
 	domain();
 	domain(std::string domainname);
 	domain(std::string domainname, user& owner_);
