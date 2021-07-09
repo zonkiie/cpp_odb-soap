@@ -283,7 +283,8 @@ int start_mt_queue(int argc, char **argv)
 } 
 void *process_queue(void* soap_parent) 
 {
-	soap *tsoap = new soap(*((soap*)soap_parent));
+	//soap *tsoap = new soap(*((soap*)soap_parent));
+	soap *tsoap = ((soap*)soap_parent);
 	while (run)
 	{
 		tsoap->socket = dequeue(); 
@@ -292,7 +293,8 @@ void *process_queue(void* soap_parent)
 		if (ssl && soap_ssl_accept(tsoap) == SOAP_OK) soap_serve(tsoap);
 		else soap_serve(tsoap);
 		tsoap->destroy();
-		soap_end(tsoap);
+		//soap_end(tsoap);
+		//delete tsoap;
 		if(debug) fprintf(stderr, "served\n"); 
 	}
 	return NULL; 
@@ -335,7 +337,9 @@ void soap_cleanup()
 		if(debug) fprintf(stderr, "Waiting for thread %d to terminate... ", i); 
 		THREAD_JOIN(tid[i]); 
 		if(debug) fprintf(stderr, "terminated\n"); 
-		soap_free(soap_thr[i]); 
+		//soap_free(soap_thr[i]);
+		soap_thr[i]->destroy();
+		delete soap_thr[i];
 	} 
 	COND_CLEANUP(queue_notfull); 
 	COND_CLEANUP(queue_notempty); 
@@ -345,6 +349,7 @@ void soap_cleanup()
 	soap_done(soap_main);
 	soap_force_closesock(soap_main);
 	if(ssl) CRYPTO_thread_cleanup();
+	delete soap_main;
 }
 
 int main(int argc, char **argv)
