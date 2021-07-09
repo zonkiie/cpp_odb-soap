@@ -46,7 +46,7 @@ static int head = 0, tail = 0;
 static MUTEX_TYPE queue_lock;    // mutex for queue ops critical sections
 static COND_TYPE queue_notempty; // condition variable when queue is empty
 static COND_TYPE queue_notfull;  // condition variable when queue is full
-struct soap *soap_main;
+struct soap soap;
 struct soap *soap_thr[MAX_THR];
 THREAD_TYPE tid[MAX_THR];
 /// @see https://www.genivia.com/doc/guide/html/index.html#mt
@@ -58,16 +58,16 @@ int start_mt_queue(int argc, char **argv)
 	progdir = dirname(progpath);
 	//struct soap soap;
 	
-	soap_main = new soap();
+	soap_init(&soap);
 	
-	soap_main->fget = http_get;
-	soap_main->bind_flags |= SO_REUSEADDR | SO_REUSEPORT;
-	soap_main->authrealm = "mysoap";
+	soap.fget = http_get;
+	soap.bind_flags |= SO_REUSEADDR | SO_REUSEPORT;
+	soap.authrealm = "mysoap";
 	if (argc < 2) // no args: assume this is a CGI application 
 	{
-		soap_serve(soap_main);   // serve request, one thread, CGI style 
-		soap_destroy(soap_main); // delete allocated class instances 
-		soap_end(soap_main);     // delete allocated data and temporaries 
+		soap_serve(&soap);   // serve request, one thread, CGI style 
+		soap_destroy(&soap); // delete allocated class instances 
+		soap_end(&soap);     // delete allocated data and temporaries 
 	} 
 	else 
 	{
@@ -109,7 +109,7 @@ int start_mt_queue(int argc, char **argv)
 					if(!strcmp(oname, "dh")) dh = strdupa(optarg);
 					if(!strcmp(oname, "randfile")) randfile = strdupa(optarg);
 					if(!strcmp(oname, "serverid")) serverid = strdupa(optarg);
-					if(!strcmp(oname, "authrealm")) soap_main->authrealm = strdupa(optarg);
+					if(!strcmp(oname, "authrealm")) soap.authrealm = strdupa(optarg);
 					if(!strcmp(oname, "configfile")) configfile = strdupa(optarg);
 					break;
 				}
@@ -175,7 +175,7 @@ int start_mt_queue(int argc, char **argv)
 						if(!strcmp(key, "dh") && dh == NULL) dh = strdupa(value);
 						if(!strcmp(key, "randfile") && randfile == NULL) randfile = strdupa(value);
 						if(!strcmp(key, "serverid") && serverid == NULL) serverid = strdupa(value);
-						if(!strcmp(key, "authrealm") && serverid == NULL) soap_main->authrealm = strdupa(value);
+						if(!strcmp(key, "authrealm") && serverid == NULL) soap.authrealm = strdupa(value);
 						
 					}
 					free(line);
@@ -198,7 +198,7 @@ int start_mt_queue(int argc, char **argv)
 			printf("dh: %s\n", dh);
 			printf("randfile: %s\n", randfile);
 			printf("serverid: %s\n", serverid);
-			printf("authrealm: %s\n", soap_main->authrealm);
+			printf("authrealm: %s\n", soap.authrealm);
 			exit(0);
 		}
 		
@@ -210,7 +210,7 @@ int start_mt_queue(int argc, char **argv)
 				fprintf(stderr, "Cannot setup thread mutex\n");
 				exit(EXIT_FAILURE);
 			}
-			if (soap_ssl_server_context(soap_main, 
+			if (soap_ssl_server_context(&soap, 
 				SOAP_SSL_DEFAULT, 
 				keyfile,     /* keyfile: required when server must authenticate to clients (see SSL docs on how to obtain this file) */ 
 				keypass,     /* password to read the key file (not used with GNUTLS) */ 
@@ -221,12 +221,15 @@ int start_mt_queue(int argc, char **argv)
 				serverid     /* optional server identification to enable SSL session cache (must be a unique name) */
 			)) 
 			{
-				soap_print_fault(soap_main, stderr); 
+				soap_print_fault(&soap, stderr); 
 				exit(EXIT_FAILURE); 
 			}
 		}
+		//struct soap *soap_thr[MAX_THR]; // each thread needs a context 
+		//THREAD_TYPE tid[MAX_THR]; 
+		//port = atoi(argv[1]); // first command-line arg is port 
 		SOAP_SOCKET m, s; 
-		m = soap_bind(soap_main, NULL, port, BACKLOG); 
+		m = soap_bind(&soap, NULL, port, BACKLOG); 
 		if (!soap_valid_socket(m))
 		{
 			fprintf(stderr, "Error: %s\n", strerror(errno));
@@ -238,22 +241,22 @@ int start_mt_queue(int argc, char **argv)
 		COND_SETUP(queue_notfull); 
 		for (i = 0; i < MAX_THR; i++) 
 		{
-			soap_thr[i] = new soap(*soap_main); 
+			soap_thr[i] = soap_copy(&soap); 
 			if(debug) fprintf(stderr, "Starting thread %d\n", i); 
 			while (THREAD_CREATE(&tid[i], (void*(*)(void*))process_queue, (void*)soap_thr[i]))
 				sleep(1); // failed, try again
 		} 
 		while (run)
 		{
-			s = soap_accept(soap_main);
+			s = soap_accept(&soap);
 			if (soap_valid_socket(s)) 
 			{
-				if(debug) fprintf(stderr, "Thread %d accepts socket %d connection from IP %u.%u.%u.%u\n", i, s, (soap_main->ip>>24)&0xFF, (soap_main->ip>>16)&0xFF, (soap_main->ip>>8)&0xFF, soap_main->ip&0xFF); 
+				if(debug) fprintf(stderr, "Thread %d accepts socket %d connection from IP %u.%u.%u.%u\n", i, s, (soap.ip>>24)&0xFF, (soap.ip>>16)&0xFF, (soap.ip>>8)&0xFF, soap.ip&0xFF); 
 				enqueue(s);
 			}
-			else if (soap_main->errnum) // accept failed, try again after 1 second
+			else if (soap.errnum) // accept failed, try again after 1 second
 			{
-				soap_print_fault(soap_main, stderr); 
+				soap_print_fault(&soap, stderr); 
 				sleep(1);
 			} 
 			else
@@ -281,9 +284,9 @@ int start_mt_queue(int argc, char **argv)
 	soap_done(&soap); */
 	return 0; 
 } 
-void *process_queue(void* soap_parent) 
+void *process_queue(void *soap) 
 {
-	soap *tsoap = new soap(*((soap*)soap_parent));
+	struct soap *tsoap = (struct soap*)soap;
 	while (run)
 	{
 		tsoap->socket = dequeue(); 
@@ -291,10 +294,11 @@ void *process_queue(void* soap_parent)
 			break; 
 		if (ssl && soap_ssl_accept(tsoap) == SOAP_OK) soap_serve(tsoap);
 		else soap_serve(tsoap);
-		tsoap->destroy();
-		soap_end(tsoap);
+		soap_destroy(tsoap); 
+		soap_end(tsoap); 
 		if(debug) fprintf(stderr, "served\n"); 
 	}
+	//soap_free(tsoap);
 	return NULL; 
 } 
 /* add job (socket with pending request) to queue */
@@ -340,10 +344,10 @@ void soap_cleanup()
 	COND_CLEANUP(queue_notfull); 
 	COND_CLEANUP(queue_notempty); 
 	MUTEX_CLEANUP(queue_lock);
-	soap_main->destroy();
-	soap_end(soap_main);
-	soap_done(soap_main);
-	soap_force_closesock(soap_main);
+	soap_destroy(&soap);
+	soap_end(&soap);
+	soap_done(&soap);
+	soap_force_closesock(&soap);
 	if(ssl) CRYPTO_thread_cleanup();
 }
 
