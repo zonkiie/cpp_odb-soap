@@ -3,6 +3,9 @@ Example for combining ODB and GSOAP in C++
 
 # Required: libboost-filesystem for filesize detection
 
+# Links
+(https://stackoverflow.com/questions/42306646/gsoap-serialized-xml-to-string)[https://stackoverflow.com/questions/42306646/gsoap-serialized-xml-to-string]
+
 ## How to start with code generation etc
 The best strategy currenty is to take my example project and modify it, until the tutorial is complete.
 Also, use my Makefile.

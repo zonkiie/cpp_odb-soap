@@ -8,6 +8,8 @@
 }*/
 
 int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
+//int ns__getUserListDB(struct soap* soap, shared_ptr<vector<user>>& userlist)
+//int ns__getUserListDB(struct soap* soap, uvecptr& userlist)
 {
 	try
 	{
@@ -31,6 +33,9 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 			t.tracer (stderr_tracer);
 			odb::result<user> r (db->query<user> ());
 			userlist.assign(r.begin(), r.end());
+			//userlist = make_shared<vector<user>>(new vector<user>(r.begin(), r.end()));
+			//userlist = make_shared<uvec*>(new uvec(r.begin(), r.end()));
+			
 			/*for(user u: userlist)
 			{
 				for(uint i = 0; i < u.domains().size(); i++)

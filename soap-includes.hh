@@ -2,7 +2,7 @@
 #define __soap_includes__
 
 #include <build/soapStub-odb.hh>
-//#include <soapH.h>  // include the generated source code headers
+#include <soapH.h>  // include the generated source code headers
 
 // include XML namespaces
 //#include <ns.nsmap> 

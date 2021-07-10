@@ -49,6 +49,15 @@ public:
 [	void owner(user& owner_); ]
 };
 
+class uservec
+{
+public:
+	std::vector<user> users;
+};
+
+typedef std::vector<user> uvec;
+typedef std::shared_ptr<uvec> uvecptr;
+
 #import "tree.hh"
 
 #endif
