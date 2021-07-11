@@ -20,7 +20,7 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 			domain d1("Johndoe.com", john);
 			domain d2("Johndoe.org", john);
 			odb::transaction t (db->begin ());
-			t.tracer (stderr_tracer);
+			//t.tracer (stderr_tracer);
 			odb::schema_catalog::create_schema (*db);
 			db->persist (john);
 			db->persist (d1);
@@ -30,9 +30,14 @@ int ns__getUserListDB(struct soap* soap, vector<user>& userlist)
 		
 		{
 			odb::transaction t (db->begin ());
-			t.tracer (stderr_tracer);
+			//t.tracer (stderr_tracer);
 			odb::result<user> r (db->query<user> ());
 			userlist.assign(r.begin(), r.end());
+			///std::stringstream ss;
+			//soap->os = &ss;*/
+			//soap_write_uservec(soap, &uv);
+			//soap->os = NULL;
+			//strxml = ss.str();
 			//userlist = make_shared<vector<user>>(new vector<user>(r.begin(), r.end()));
 			//userlist = make_shared<uvec*>(new uvec(r.begin(), r.end()));
 			
